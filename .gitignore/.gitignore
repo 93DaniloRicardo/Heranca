@@ -1,0 +1,101 @@
+using System;
+
+namespace Cad.Heranca
+{
+    class Veiculo //veiculo base
+    {
+        private int rodas;
+        public int VelMax;
+        private bool ligado;
+
+        public Veiculo(int rodas)
+        {
+            this.rodas=rodas;
+        }
+        
+        public void ligar()
+        {
+            ligado=true;
+        }
+        public void desligar()
+        {
+            ligado=false;
+        }
+
+        public string GetLigado()
+        {
+            return (ligado?"sim":"não");
+        }
+
+        public int GetRodas()
+        {
+            return rodas;
+        }
+        public void setRodas(int rodas)
+        {
+            if(rodas<0)
+            {
+                this.rodas=0;
+            }
+                else if(rodas>40)
+            {
+                this.rodas=40;
+            }
+                else
+            {
+                this.rodas=rodas;
+            }
+        }
+    }
+    class Carro:Veiculo //classe derivada
+    {
+        public string nome;
+        public string cor;
+
+        public Carro(string nome, string cor):base(4)
+        {
+            desligar();
+            VelMax=120;
+            this.nome=nome;
+            this.cor=cor;
+        }
+    }
+
+    class CarroCombate:Carro
+    {
+        public int municao;
+
+        public CarroCombate():base("Carro de Combate", "Azul")
+        {
+            municao=100;
+            setRodas(6);
+        }
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Carro c1 = new Carro ("Rapidumba", "Azul");
+            CarroCombate cb1 = new CarroCombate (); 
+
+           // c1.ligar();
+
+            System.Console.WriteLine("-------------");
+            System.Console.WriteLine("cor.....: " + c1.cor);
+            System.Console.WriteLine("Nome....: " + c1.nome);
+            System.Console.WriteLine("Vel. Max: " + c1.VelMax); 
+            System.Console.WriteLine("Rodas...: " + c1.GetRodas()); 
+            System.Console.WriteLine("Ligado..: " + c1.GetLigado()); 
+            System.Console.WriteLine("-----------");
+
+            System.Console.WriteLine("-------------");
+            System.Console.WriteLine("cor.....: " + cb1.cor);
+            System.Console.WriteLine("Nome....: " + cb1.nome);
+            System.Console.WriteLine("Vel. Max: " + cb1.VelMax); 
+            System.Console.WriteLine("Rodas...: " + cb1.GetRodas()); 
+            System.Console.WriteLine("Ligado..: " + cb1.GetLigado()); 
+            System.Console.WriteLine("Munição.: " + cb1.municao);
+            System.Console.WriteLine("-----------");
+        }
+    }
+}
